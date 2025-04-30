@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lifemeter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: "Lexend Deca", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+            background-color: rgba(84, 112, 111, 0.2);
+        }
+        .content {
+            flex: 1;
+        }
+        .headercontainer, input {
+            margin-bottom: 20px;
+        }
+        .dayscontainer {
+            width: 100%;
+            position: relative;
+        }
+        .unliveddaycontainer {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .unlivedday {
+            width: 3px;
+            height: 3px;
+            margin: 0 1px 1px 0;
+            background-color:  rgba(84, 112, 111, 0.4);
+        }
+        #dayslivedcontainer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+        .daylived {
+            width: 3px;
+            height: 3px;
+            margin: 0 1px 1px 0;
+            display: inline-block;
+            background-color: rgba(84, 112, 111, 1.0);
+        }
+        .footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="headercontainer">
+            <h1>lifemeter</h1>
+            <form id="dateForm">
+                <label for="startDate">Enter the date you were born</label>
+                <input type="date" id="startDate" required>
+                <div>
+                    <button type="submit">Show your life's progress within a 100 year period</button>
+                    <button onclick="location.reload();">&#8634;</button>
+                </div>
+            </form>
+        </div>
+        <div class="dayscontainer">
+            <!-- 100 years represented by 36,525 squares -->
+            <div class="unliveddaycontainer">
+                <script>
+                    for (let i = 0; i < 36525; i++) {
+                        const square = document.createElement('div');
+                        square.className = 'unlivedday';
+                        document.querySelector('.unliveddaycontainer').appendChild(square);
+                    }
+                </script>
+            </div>
+            <!-- Calculated days user has been alove -->
+            <div id="dayslivedcontainer"></div>
+        </div>
+    </div>
+    <div class="footer">&#169; 2025 Spike Bachman</div>
+    <script>
+        document.getElementById('dateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const startDate = new Date(document.getElementById('startDate').value);
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const container = document.getElementById('dayslivedcontainer');
+            container.innerHTML = '';
+
+            for (let i = 0; i < diffDays; i++) {
+                const alive = document.createElement('div');
+                alive.className = 'daylived';
+                container.appendChild(alive);
+            }
+        });
+    </script>
+</body>
+</html>
