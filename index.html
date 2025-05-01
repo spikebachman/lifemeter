@@ -38,6 +38,14 @@
             margin: 0 1px 1px 0;
             background-color:  rgba(84, 112, 111, 0.4);
         }
+        @media only screen and (max-width: 430px) {
+            .unlivedday { 
+                width: 1px;
+                height: 1px;
+                margin: 0 1px 1px 0;
+                background-color:  rgba(84, 112, 111, 0.4);
+            }
+        }
         #dayslivedcontainer {
             display: flex;
             flex-direction: row;
@@ -53,6 +61,14 @@
             margin: 0 1px 1px 0;
             display: inline-block;
             background-color: rgba(84, 112, 111, 1.0);
+        }
+        @media only screen and (max-width: 430px) {
+            .daylived { 
+                width: 1px;
+                height: 1px;
+                margin: 0 1px 1px 0;
+                background-color:  rgba(84, 112, 111, 1.0);
+            }
         }
         .footer {
             position: relative;
@@ -70,16 +86,17 @@
                 <label for="startDate">Enter the date you were born</label>
                 <input type="date" id="startDate" required>
                 <div>
-                    <button type="submit">Show your life's progress within a 100 year period</button>
+                    <button type="submit">Show your life's progress towards 80 years old</button>
                     <button onclick="location.reload();">&#8634;</button>
                 </div>
             </form>
         </div>
         <div class="dayscontainer">
             <!-- 100 years represented by 36,525 squares -->
+            <!-- 80 years represented by 29,220 squares -->
             <div class="unliveddaycontainer">
                 <script>
-                    for (let i = 0; i < 36525; i++) {
+                    for (let i = 0; i < 29220; i++) {
                         const square = document.createElement('div');
                         square.className = 'unlivedday';
                         document.querySelector('.unliveddaycontainer').appendChild(square);
